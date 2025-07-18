@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>User Form</title></head>
+<body>
+<h2>{{ 'Edit' if user else 'Add' }} User</h2>
+<form method="post">
+    Name: <input type="text" name="name" value="{{ user.name if user else '' }}"><br>
+    Email: <input type="email" name="email" value="{{ user.email if user else '' }}"><br>
+    Phone No: <input type="text" name="phone_no" value="{{ user.phone_no if user else '' }}"><br>
+    {% if not user %}
+        <h3>Address Info</h3>
+        Address Line 1: <input type="text" name="address_line1"><br>
+        Address Line 2: <input type="text" name="address_line2"><br>
+        City: <input type="text" name="city"><br>
+        State: <input type="text" name="state"><br>
+    {% endif %}
+    <input type="submit" value="{{ 'Update' if user else 'Add' }}">
+</form>
+<a href="/">Back to List</a>
+</body>
+</html>

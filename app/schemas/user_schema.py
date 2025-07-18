@@ -1,23 +1,45 @@
 from pydantic import BaseModel
-from typing import Optional  
+from typing import Optional
+
 
 class UserBase(BaseModel):
+    name: str
     email: str
-    username: str
+    phone_no: str
+
 
 class UserCreate(UserBase):
-    full_name: Optional[str] = None
+    pass
+
 
 class UserUpdate(BaseModel):
-    email: Optional[str] = None
-    username: Optional[str] = None
-    full_name: Optional[str] = None
-    disabled: Optional[bool] = None
+    name: Optional[str]
+    email: Optional[str]
+    phone_no: Optional[str]
+
 
 class User(UserBase):
     id: int
-    full_name: Optional[str] = None
-    disabled: Optional[bool] = False
 
     class Config:
-        from_attributes = True  
+        orm_mode = True
+
+
+# Address
+class UserAddressBase(BaseModel):
+    address_line1: str
+    address_line2: Optional[str] = None
+    city: str
+    state: str
+
+
+class UserAddressCreate(UserAddressBase):
+    pass
+
+
+class UserAddress(UserAddressBase):
+    id: int
+    user_id: int
+
+    class Config:
+        orm_mode = True
